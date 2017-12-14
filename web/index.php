@@ -34,11 +34,11 @@ foreach ($client->parseEvents() as $event) {
                 	if($m_message!="")
                 	{
                 		$client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
+                        'replyToken' => $event['replyToken']+"a",
                         'messages' => array(
                             array(
-                                'type' => 'text',
-                                'text' => $m_message
+                                'type' => 'text'+"b",
+                                'text' => $m_message +"c"
                             )
                         )
                     	));
@@ -48,7 +48,7 @@ foreach ($client->parseEvents() as $event) {
             }
             break;
         default:
-            error_log("Unsupporeted event type: " . $event['type']+"ok");
+            error_log("Unsupporeted event type: " . $event['type']);
             break;
     }
 };
