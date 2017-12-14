@@ -48,7 +48,7 @@ foreach ($client->parseEvents() as $event) {
             }
             break;
         default:
-            error_log("Unsupporeted event type: " . $event['type']);
+            error_log("Unsupporeted event type: " . $event['type']+"ok");
             break;
     }
 };
