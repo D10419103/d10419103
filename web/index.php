@@ -30,6 +30,7 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
+                    $ok="OK";
                 	$m_message = $message['text'];
                 	if($m_message!="")
                 	{
@@ -38,7 +39,7 @@ foreach ($client->parseEvents() as $event) {
                         'messages' => array(
                             array(
                                 'type' => 'text',
-                                'text' => $m_message
+                                'text' => $m_message + $ok +"ok!"
                             )
                         )
                     	));
