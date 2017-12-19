@@ -30,9 +30,9 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    $ok="OK";
+                    $ok="你好";
                 	$m_message = $message['text'];
-                	if($m_message!="")
+                	if($m_message =="安安")
                 	{
                 		$client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
