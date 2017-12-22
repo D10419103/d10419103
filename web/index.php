@@ -31,6 +31,7 @@ foreach ($client->parseEvents() as $event) {
             switch ($message['type']) {
                 case 'text':
                     $ok="你好";
+                    $a="歡迎來到我們的專題";
                 	$m_message = $message['text'];
                 	if($m_message =="安安")
                 	{
@@ -43,7 +44,14 @@ foreach ($client->parseEvents() as $event) {
                             )
                         )
                     	));
-                	}
+                	}else {
+                        $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'text',
+                                'text' => $a
+                    }
                     break;
                 
             }
