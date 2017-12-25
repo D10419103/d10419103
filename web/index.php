@@ -52,8 +52,8 @@ foreach ($client->parseEvents() as $event) {
                                )
                             )
                         	));
-                       
-                        if($m_message == "a"){
+                        }
+                     if($m_message == "a"){
                         $client->replyMessage(array(
                            'replyToken' => $event['replyToken'],
                             'messages' => array(
@@ -63,8 +63,6 @@ foreach ($client->parseEvents() as $event) {
                                )
                             )
                         	));
-                        }
-                        
                         }else {
                             $client->replyMessage(array(
                             'replyToken' => $event['replyToken'],
