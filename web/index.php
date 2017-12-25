@@ -49,11 +49,11 @@ foreach ($client->parseEvents() as $event) {
                                 array(
                                    'type' => 'text',
                                    'text' => $Q
-                                     
                                )
                             )
                         	));
-                       if($m_message == "a"){
+                       
+                        if($m_message == "a"){
                         $client->replyMessage(array(
                            'replyToken' => $event['replyToken'],
                             'messages' => array(
