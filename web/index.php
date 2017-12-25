@@ -42,16 +42,6 @@ foreach ($client->parseEvents() as $event) {
                     $a="歡迎來到我們的專題!\n請輸入以下的代號來查詢相關訊息!!\nA:客服\nB:介紹";
                 	$m_message = $message['text'];
                     if($m_message == "A"){
-                        $client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $Q
-                               )
-                            )
-                        	));
-                    
                         if($m_message == "a"){
                         $client->replyMessage(array(
                            'replyToken' => $event['replyToken'],
@@ -63,6 +53,19 @@ foreach ($client->parseEvents() as $event) {
                             )
                         	));
                         }
+                        
+                        
+                        $client->replyMessage(array(
+                           'replyToken' => $event['replyToken'],
+                            'messages' => array(
+                                array(
+                                   'type' => 'text',
+                                   'text' => $Q
+                               )
+                            )
+                        	));
+                    
+                        
                     
                     }
                      else {
