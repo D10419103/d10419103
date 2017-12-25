@@ -30,7 +30,7 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    $Q="A:常見問題\nB:儲值問題"
+                    $Q="A:常見問題\nB:儲值問題";
                     
                     $a="歡迎來到我們的專題!\n請輸入以下的代號來查詢相關訊息!!\nA:客服\nB:介紹";
                 	$m_message = $message['text'];
