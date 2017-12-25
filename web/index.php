@@ -30,7 +30,7 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    $Q="請問你要查詢\nA:常見問題\nB:儲值問題";
+                    $Q="請問你要查詢\na:常見問題\nb:儲值問題";
                     $Q1="1:「魔法石」的用途？\n2:如何購買「魔法石」？\n3:「魔法石」可轉移至其他帳戶嗎？\n4:如何進行綁定？\n5:可否更換用作綁定的社交平台帳戶？\n
                     6:如何註冊新遊戲帳戶開始遊戲？\n7:為什麼找不到「綁定帳戶」的選項？\n8:如果我的帳戶不見了，而又沒有進行綁定怎麼辦？\n";$Q2="";
                     $A1="魔法石可用作回復體力、回復戰靈、抽取魔法石封印卡、擴充背包空間與好友上限，以及在戰鬥死亡時進行復活。";$A2="玩家可在遊戲內選擇「商店」，然後選擇「魔法石商店」，使用 App Store 或 Google Play 帳戶登入後選購魔法石。";
@@ -49,7 +49,11 @@ foreach ($client->parseEvents() as $event) {
                                 array(
                                    'type' => 'text',
                                    'text' => $Q
-                                     if($m_message == "A"){
+                                     
+                               )
+                            )
+                        	));
+                       if($m_message == "a"){
                         $client->replyMessage(array(
                            'replyToken' => $event['replyToken'],
                             'messages' => array(
@@ -60,10 +64,6 @@ foreach ($client->parseEvents() as $event) {
                             )
                         	));
                         }
-                               )
-                            )
-                        	));
-                       
                         
                         }else {
                             $client->replyMessage(array(
