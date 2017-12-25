@@ -30,8 +30,11 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    $Q="請問你要查詢\na:常見問題\nb:儲值問題";
-                    $Q1="A1:「魔法石」的用途？\nA2:如何購買「魔法石」？\nA3:「魔法石」可轉移至其他帳戶嗎？\nA4:如何進行綁定？\nA5:可否更換用作綁定的社交平台帳戶？\nA6:如何註冊新遊戲帳戶開始遊戲？\nA7:為什麼找不到「綁定帳戶」的選項？\nA8:如果我的帳戶不見了，而又沒有進行綁定怎麼辦？\n";$Q2="1:如何購買「魔法石」？\n2:「魔法石」可經由什麼付費平台購買呢？\n3:如果沒有信用卡可怎麼購買「魔法石」？\n4:為什麼已成功完成交易，但尚未收到「魔法石」？\n";
+                    $Q="請問你要查詢\na:常見問題\nb:儲值問題";$I="I1:特別任務\n;I2:通關獎賞\n;I3:潛能解放\n;I4:異空轉生\n;";
+                    $I1="特別任務將顯示於世界地圖的左上角，不同時段有不同的戰鬥任務，召喚師可挑戰更強的對手來訓練召喚獸，也可搜集強化及進化元素。
+
+　　在特別任務區域內，設有不同類型的戰鬥任務，其中的緊急任務每天只開放 2 次，每次 1 小時，召喚師可透過戰鬥獲得珍貴的強化素材，千萬別錯失大幅提升召喚獸等級的良機。";$I2="召喚師成功挑戰每一個新關卡(Stage)，都可獲得一次魔法石獎賞。從遊戲開始起計算，所有的關卡 (包括緊急任務關卡) 只會獲得一次通關魔法石獎賞。如果關卡顯示為「Clear」，即代表召喚師經已完成任務並已領取魔法石獎賞。";$I3="解放召喚獸的潛能可以提升召喚獸的稀有度 (星等)，同時提升其生命力、攻擊力及回復力的上限，潛能解放 (以下簡稱為 「潛解」) 後召喚獸會得到新的技能。此系統只適用於已開放潛解的召喚獸。";$I4="召喚獸可以透過異空轉生的方式，蛻變成煉化及幻化兩種形態，提升其生命力、攻擊力及回復力的上限，同時獲得新的技能。此系統只適用於已開放異空轉生的召喚獸。";
+                    $Q1="A1:「魔法石」的用途？\nA2:如何購買「魔法石」？\nA3:「魔法石」可轉移至其他帳戶嗎？\nA4:如何進行綁定？\nA5:可否更換用作綁定的社交平台帳戶？\nA6:如何註冊新遊戲帳戶開始遊戲？\nA7:為什麼找不到「綁定帳戶」的選項？\nA8:如果我的帳戶不見了，而又沒有進行綁定怎麼辦？\n";$Q2="B1:如何購買「魔法石」？\nB2:「魔法石」可經由什麼付費平台購買呢？\nB3:如果沒有信用卡可怎麼購買「魔法石」？\nB4:為什麼已成功完成交易，但尚未收到「魔法石」？\n";
                     $A1="魔法石可用作回復體力、回復戰靈、抽取魔法石封印卡、擴充背包空間與好友上限，以及在戰鬥死亡時進行復活。";$A2="玩家可在遊戲內選擇「商店」，然後選擇「魔法石商店」，使用 App Store 或 Google Play 帳戶登入後選購魔法石。";
                     $A3="魔法石是不可以轉移的。";$A4="在遊戲主界面右上角的「設定」(齒輪)點選「綁定帳戶」，將現有的帳戶與社交平台帳戶綁定，保存遊戲進度。
 ＊請使用未曾用作綁定的社交平台帳戶。";$A5="社交平台帳戶的綁定及遊戲進度是不能被取消的。
@@ -46,7 +49,7 @@ foreach ($client->parseEvents() as $event) {
 3. 選擇「魔法石商店」。
 4. 如果出現一個對話窗要求確認交易，玩家可按 「確認」 恢復交易。
 5. 成功恢復交易後，將顯示已恢復交易單據的數量，及已恢復魔法石的總數量。";
-                    $a="歡迎來到我們的專題!\n請輸入以下的代號來查詢相關訊息!!\nA:客服\nB:介紹";
+                    $a="歡迎來到我們的專題!\n請輸入以下的代號來查詢相關訊息!!\nA:客服服務\nB:遊戲介紹";
                 	$m_message = $message['text'];
                     if($m_message == "A"){
                          $client->replyMessage(array(
@@ -195,6 +198,57 @@ foreach ($client->parseEvents() as $event) {
                                 array(
                                    'type' => 'text',
                                    'text' => $B4
+                               )
+                            )
+                        	));
+                        }
+                    if($m_message == "B"){
+                         $client->replyMessage(array(
+                             'replyToken' => $event['replyToken'],
+                             'messages' => array(
+                             array(
+                                   'type' => 'text',
+                                   'text' => $I
+                               )
+                            )
+                        	));
+                    }else if($m_message == "I1"){
+                        $client->replyMessage(array(
+                           'replyToken' => $event['replyToken'],
+                            'messages' => array(
+                                array(
+                                   'type' => 'text',
+                                   'text' => $I1
+                               )
+                            )
+                        	));
+                        }else if($m_message == "I2"){
+                        $client->replyMessage(array(
+                           'replyToken' => $event['replyToken'],
+                            'messages' => array(
+                                array(
+                                   'type' => 'text',
+                                   'text' => $I2
+                               )
+                            )
+                        	));
+                        }else if($m_message == "I3"){
+                        $client->replyMessage(array(
+                           'replyToken' => $event['replyToken'],
+                            'messages' => array(
+                                array(
+                                   'type' => 'text',
+                                   'text' => $I3
+                               )
+                            )
+                        	));
+                        }else if($m_message == "I4"){
+                        $client->replyMessage(array(
+                           'replyToken' => $event['replyToken'],
+                            'messages' => array(
+                                array(
+                                   'type' => 'text',
+                                   'text' => $I4
                                )
                             )
                         	));
