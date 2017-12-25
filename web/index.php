@@ -52,30 +52,6 @@ foreach ($client->parseEvents() as $event) {
                                )
                             )
                         	));
-                        if($m_message == "A")
-                	    {
-                	    	$client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $Q1
-                               )
-                            )
-                        	));
-                                if($m_message == "1")
-                	    {
-                	    	$client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $A1
-                               )
-                            )
-                        	));
-                	    }
-                    	}
                         }else {
                             $client->replyMessage(array(
                             'replyToken' => $event['replyToken'],
