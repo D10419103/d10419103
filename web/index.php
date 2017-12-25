@@ -85,72 +85,6 @@ foreach ($client->parseEvents() as $event) {
                                )
                             )
                         	));
-                	    }else if($m_message == "3")
-                	    {
-                	    	$client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $A3
-                               )
-                            )
-                        	));
-                	    }else if($m_message == "4")
-                	    {
-                	    	$client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $A4
-                               )
-                            )
-                        	));
-                	    }else if($m_message == "5")
-                	    {
-                	    	$client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $A5
-                               )
-                            )
-                        	));
-                	    }else if($m_message == "6")
-                	    {
-                	    	$client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $A6
-                               )
-                            )
-                        	));
-                	    }else if($m_message == "7")
-                	    {
-                	    	$client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $A7
-                               )
-                            )
-                        	));
-                	    }else if($m_message == "8")
-                	    {
-                	    	$client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $A8
-                               )
-                            )
-                        	));
                 	    }
                     	}else if($m_message == "B")
                     	{
@@ -159,23 +93,11 @@ foreach ($client->parseEvents() as $event) {
                             'messages' => array(
                                 array(
                                     'type' => 'text',
-                                    'text' => $Q1
+                                    'text' => $Q2
                                 )
                             )
                     	    ));
-                    }else if($m_message == "B"){
-                            if($m_message == $Q3)
-                	    {
-                	    	$client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                   'type' => 'text',
-                                   'text' => $A1
-                               )
-                            )
-                        	));
-                	    }
+                    }
                         }else {
                             $client->replyMessage(array(
                             'replyToken' => $event['replyToken'],
