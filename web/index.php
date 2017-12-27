@@ -53,7 +53,7 @@ foreach ($client->parseEvents() as $event) {
 3. 選擇「魔法石商店」。
 4. 如果出現一個對話窗要求確認交易，玩家可按 「確認」 恢復交易。
 5. 成功恢復交易後，將顯示已恢復交易單據的數量，及已恢復魔法石的總數量。";
-                    $a="歡迎來到我們的專題!\n請輸入以下的代號來查詢相關訊息!!\nA:客服服務\nB:遊戲介紹";
+                    $a="請輸入以下的代號來查詢相關服務!!\nA:客服服務\nB:遊戲介紹";
                 	$m_message = $message['text'];
                     if($m_message == "A"){
                          $client->replyMessage(array(
