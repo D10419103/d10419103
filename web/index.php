@@ -37,9 +37,7 @@ foreach ($client->parseEvents() as $event) {
                                  $bot->sendText($replyToken, "文字訊息");
                                  $msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("文字訊係");
 $bot->replyMessage($replyToken,$msg);
-                                 
-                                 $msg = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder($packageId,$stickerId);
-$bot->replyMessage($reply_token,$msg);
+                                
                                )
                             )
                         	));                          
