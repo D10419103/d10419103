@@ -32,9 +32,9 @@ foreach ($client->parseEvents() as $event) {
                                                 
                             
                           
-                             array(
+
                                  $bot->sendText($replyToken, "文字訊息");
-                              );                          
+                        
             }
         default:
             error_log("Unsupporeted event type: " . $event['type']);
