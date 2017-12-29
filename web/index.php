@@ -30,14 +30,11 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             if ($m_message == 1) {
                                                 
-                            $client->replyMessage(array(
-                           'replyToken' => $event['replyToken'],
-                           'messages' => array(
+                            
+                          
                              array(
                                  $bot->sendText($replyToken, "文字訊息");
-                               )
-                            )
-                        	));                          
+                              );                          
             }
         default:
             error_log("Unsupporeted event type: " . $event['type']);
