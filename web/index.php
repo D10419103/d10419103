@@ -34,10 +34,6 @@ foreach ($client->parseEvents() as $event) {
                            'replyToken' => $event['replyToken'],
                            'messages' => array(
                              array(
-                                  echo $Q;
-                                 echo " 0 0";
-                                 print $Q1;
-                                 print "1 1 ";
                                  $bot->sendText($replyToken, "文字訊息");
                                  $msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("文字訊係");
 $bot->replyMessage($replyToken,$msg);
