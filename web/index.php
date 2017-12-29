@@ -38,9 +38,6 @@ foreach ($client->parseEvents() as $event) {
                                  echo " 0 0";
                                  print $Q1;
                                  print "1 1 ";
-                                 bot.on('message', function(event) {
-  console.log(event); //把收到訊息的 event 印出來看看
-});
                                  $bot->sendText($replyToken, "文字訊息");
                                  $msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("文字訊係");
 $bot->replyMessage($replyToken,$msg);
