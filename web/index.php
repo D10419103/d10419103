@@ -27,6 +27,9 @@ $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 foreach ($client->parseEvents() as $event) {
     switch ($event['type']) {
         case 'message':
+             $message = $event['message'];
+            switch ($message['type']) {
+                case 'text':
              $Q="請問你要查詢\nA:常見問題\nB:儲值問題";$I="I1:特別任務\nI2:通關獎賞\nI3:潛能解放\nI4:異空轉生";
                     $I1="特別任務將顯示於世界地圖的左上角，不同時段有不同的戰鬥任務，召喚師可挑戰更強的對手來訓練召喚獸，也可搜集強化及進化元素。
 　　在特別任務區域內，設有不同類型的戰鬥任務，其中的緊急任務每天只開放 2 次，每次 1 小時，召喚師可透過戰鬥獲得珍貴的強化素材，千萬別錯失大幅提升召喚獸等級的良機。";
