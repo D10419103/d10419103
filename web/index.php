@@ -55,7 +55,7 @@ foreach ($client->parseEvents() as $event) {
                     $a="請輸入以下的代號來查詢相關服務!!\n1:客服服務\n2:遊戲介紹";
                 	$m_message = $message['text'];
                       if($m_message==1){                         
-                          print_string = $Q   
+                          print_string = "安安" 
                       }
                     else if($m_message==A || $m_message==a){                     
                             $client->replyMessage(array(
