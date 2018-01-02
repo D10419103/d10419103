@@ -69,7 +69,7 @@ foreach ($client->parseEvents() as $event) {
                           
                           
                           
-                          switch ($event['type']) {
+                          
         case 'message':
             $message = $event['message'];
             switch ($message['type']) {
@@ -90,10 +90,7 @@ foreach ($client->parseEvents() as $event) {
             
             }
             break;
-        default:
-            error_log("Unsupporeted event type: " . $event['type']);
-            break;
-    }
+    
 };
                           
                           
