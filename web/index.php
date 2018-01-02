@@ -89,9 +89,8 @@ foreach ($client->parseEvents() as $event) {
                         
             
             }
-            break;
-    
-};
+
+
                           
                           
                           
