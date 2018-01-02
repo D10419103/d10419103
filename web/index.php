@@ -27,10 +27,10 @@ $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 foreach ($client->parseEvents() as $event) {
     switch ($event['type']) {
         case 'message':
-             $message = $event['message'];
+            $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-             $Q="請問你要查詢\nA:常見問題\nB:儲值問題";$I="I1:特別任務\nI2:通關獎賞\nI3:潛能解放\nI4:異空轉生";
+                    $Q="請問你要查詢\nA:常見問題\nB:儲值問題";$I="I1:特別任務\nI2:通關獎賞\nI3:潛能解放\nI4:異空轉生";
                     $I1="特別任務將顯示於世界地圖的左上角，不同時段有不同的戰鬥任務，召喚師可挑戰更強的對手來訓練召喚獸，也可搜集強化及進化元素。
 　　在特別任務區域內，設有不同類型的戰鬥任務，其中的緊急任務每天只開放 2 次，每次 1 小時，召喚師可透過戰鬥獲得珍貴的強化素材，千萬別錯失大幅提升召喚獸等級的良機。";
                     $I2="召喚師成功挑戰每一個新關卡(Stage)，都可獲得一次魔法石獎賞。從遊戲開始起計算，所有的關卡 (包括緊急任務關卡) 只會獲得一次通關魔法石獎賞。如果關卡顯示為「Clear」，即代表召喚師經已完成任務並已領取魔法石獎賞。";
@@ -53,9 +53,9 @@ foreach ($client->parseEvents() as $event) {
 4. 如果出現一個對話窗要求確認交易，玩家可按 「確認」 恢復交易。
 5. 成功恢復交易後，將顯示已恢復交易單據的數量，及已恢復魔法石的總數量。";
                     $a="請輸入以下的代號來查詢相關服務!!\n1:客服服務\n2:遊戲介紹";
-            $message = $event['message'];
-            if ($m_message == 1) {
-                      $client->replyMessage(array(
+                	$m_message = $message['text'];
+                      if($m_message==1){                         
+                            $client->replyMessage(array(
                            'replyToken' => $event['replyToken'],
                            'messages' => array(
                              array(
@@ -63,8 +63,22 @@ foreach ($client->parseEvents() as $event) {
                                    'text' => $Q     
                                )
                             )
-          	)); 
+                    	)); 
+                      }
+                        else{
+                            $client->replyMessage(array(
+                            'replyToken' => $event['replyToken'],
+                            'messages' => array(
+                                array(
+                                    'type' => 'text',
+                                    'text' => $a
+                                    )
+                            )
+                    	    ));
+                    }
+            
             }
+            break;
         default:
             error_log("Unsupporeted event type: " . $event['type']);
             break;
