@@ -204,7 +204,7 @@ $B4="交易中途如網絡中斷 或 離開遊戲，有可能會影響魔法石�
                             )                    
           	));
                              break; 
-                           case ($m_message==A || $m_message== a): 
+                           case ($m_message=="A" || $m_message== "a"): 
                             $client->replyMessage(array(
                            'replyToken' => $event['replyToken'],
                            'messages' => array(
@@ -215,7 +215,7 @@ $B4="交易中途如網絡中斷 或 離開遊戲，有可能會影響魔法石�
                             )
                         	));              
                              break; 
-                          
+                           
 
                         default:
                             $client->replyMessage(array(
