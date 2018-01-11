@@ -66,7 +66,7 @@ switch ($event['type']) {
                         ),
                         array(
                             'type' => 'text',
-                            'text' => '介紹你 '.$store_text.' 不錯喔',
+                            'text' => '介紹你 '.$item['gsx$storename']['$t'].' 不錯喔',
                         )
 
                     ),
