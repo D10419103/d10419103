@@ -22,7 +22,7 @@ require_once('./LINEBotTiny.php');
 
 $channelAccessToken = getenv('LINE_CHANNEL_ACCESSTOKEN');
 $channelSecret = getenv('LINE_CHANNEL_SECRET');
-$googledataspi ="https://spreadsheets.google.com/feeds/list/2PACX-1vQCwsA8fw6xI1BAEOkJI2l0qy_qS1S-4fdP6sJtOue1zkz71oE3UEEPEBght8NxU1JRKSOZcgqkVnky/od6/public/values?alt=json";
+$googledataspi ="https://spreadsheets.google.com/feeds/list/2PACX-1vQM1rw7ng4utfYxkEwZ8qAftWD91VEmdlm0XB6eNvRoO3PkJnCTVA9ABFUzPhR7sfKEZup4R15w0T-M/od6/public/values?alt=json";
 
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 foreach ($client->parseEvents() as $event) {
