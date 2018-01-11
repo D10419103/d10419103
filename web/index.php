@@ -23,64 +23,70 @@ require_once('./LINEBotTiny.php');
 $channelAccessToken = getenv('LINE_CHANNEL_ACCESSTOKEN');
 $channelSecret = getenv('LINE_CHANNEL_SECRET');
 
-$googledataspi = "https://spreadsheets.google.com/feeds/list/1ggAB1JfVFne-E7VCWT3TG8KPFyEXxZHVjmei-F_bYv8/od6/public/values?alt=json";
-
-// 建立Client from LINEBotTiny
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
-
-// 取得事件(只接受文字訊息)
 foreach ($client->parseEvents() as $event) {
-switch ($event['type']) {       
-    case 'message':
-        // 讀入訊息
-        $message = $event['message'];
-
-        // 將Google表單轉成JSON資料
-        $json = file_get_contents($googledataspi);
-        $data = json_decode($json, true);           
-        $store_text=''; 
-        // 資料起始從feed.entry          
-        foreach ($data['feed']['entry'] as $item) {
-            // 將keywords欄位依,切成陣列
-            $keywords = explode(',', $item['gsx$keywords']['$t']);
-
-            // 以關鍵字比對文字內容，符合的話將店名/地址寫入
-            foreach ($keywords as $keyword) {
-                if (mb_strpos($message['text'], $keyword) !== false) {                      
-                    $store_text = $item['gsx$storename']['$t']." 地址是:".$item['gsx$storeaddress']['$t'];                 
-              }
+    switch ($event['type']) {
+        case 'message':
+            $message = $event['message'];
+            $json = file_get_contents('https://spreadsheets.google.com/feeds/list/1tQCaj3LUVwH0tBuPrfBY2dOJuF-qzpYEdOqGdNvJRLc/od6/public/values?alt=json');
+            $data = json_decode($json, true);
+            $result = array();
+            foreach ($data['feed']['entry'] as $item) {
+                $keywords = explode(',', $item['gsx$keyword']['$t']);
+                foreach ($keywords as $keyword) {
+                    if (mb_strpos($message['text'], $keyword) !== false) {
+                        $candidate = array(
+                            'thumbnailImageUrl' => $item['gsx$photourl']['$t'],
+                            'title' => $item['gsx$title']['$t'],
+                            'text' => $item['gsx$title']['$t'],
+                            'actions' => array(
+                                array(
+                                    'type' => 'uri',
+                                    'label' => '查看詳情',
+                                    'uri' => $item['gsx$url']['$t'],
+                                    ),
+                                ),
+                            );
+                        array_push($result, $candidate);
+                    }
+                }
             }
-        }       
-
-
-
-        switch ($message['type']) {
-            case 'text':
-                // 回覆訊息
-                // 第一段 你要想找_(原字串)_ 讓我想想喔…
-                // 第二段 介紹你_______不錯喔
-                $client->replyMessage(array(
-                    'replyToken' => $event['replyToken'],
-                    'messages' => array(
-                        array(
-                            'type' => 'text',
-                            'text' => '你想要找'.$message['text'].' 讓我想想喔…',
+            switch ($message['type']) {
+                case 'text':
+                    $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'text',
+                                'text' => $message['text'].'讓我想想喔…',
+                            ),
+                            array(
+                                'type' => 'template',
+                                'altText' => '為您推薦下列美食：',
+                                'template' => array(
+                                    'type' => 'carousel',
+                                    'columns' => $result,
+                                ),
+                            ),
+                            array(
+                                'type' => 'text',
+                                'text' => '這些都超好吃，真心不騙！',
+                            ),
+                            array(
+                                'type' => 'sticker',
+                                'packageId' => '1',
+                                'stickerId' => '2',
+                            ),
                         ),
-                        array(
-                            'type' => 'text',
-                            'text' => '介紹你 '.$store_text.' 不錯喔',
-                        )
-
-                    ),
-                ));               
-                break;
-            default:
-                error_log("Unsupporeted message type: " . $message['type']);
-                break;
-        }
-        break;
-    default:
-        error_log("Unsupporeted event type: " . $event['type']);
-        break;
-}
+                    ));
+                    break;
+                default:
+                    error_log("Unsupporeted message type: " . $message['type']);
+                    break;
+            }
+            break;
+        default:
+            error_log("Unsupporeted event type: " . $event['type']);
+            break;
+    }
 };
