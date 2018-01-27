@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 LINE Corporation
  *
@@ -15,25 +14,19 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 require_once('line-bot-sdk-tiny/LINEBotTiny.php');
-
-$channelAccessToken = 'd94WAvqAJBWRXZ3pmnlejuQ7S/Glp8CDK0FHSSLEWlypMdpiPerBs23gk/xsbQjT31RHVd1iq4YVMqqLbYiRRA0AnDPQohV2zFBBwMBK5JchWjB47muK5uiHL2l/JvkepuraSTviQNaPxMjKM7z/jwdB04t89/1O/w1cDnyilFU=';
-$channelSecret = 'f09490cd01d030f3bed923ab84c529cd';
-
+$channelAccessToken = '<your channel access token>';
+$channelSecret = '<your channel secret>';
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 foreach ($client->parseEvents() as $event) {
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
-
             $json = file_get_contents('https://spreadsheets.google.com/feeds/list/1tQCaj3LUVwH0tBuPrfBY2dOJuF-qzpYEdOqGdNvJRLc/od6/public/values?alt=json');
             $data = json_decode($json, true);
             $result = array();
-
             foreach ($data['feed']['entry'] as $item) {
                 $keywords = explode(',', $item['gsx$keyword']['$t']);
-
                 foreach ($keywords as $keyword) {
                     if (mb_strpos($message['text'], $keyword) !== false) {
                         $candidate = array(
@@ -52,7 +45,6 @@ foreach ($client->parseEvents() as $event) {
                     }
                 }
             }
-
             switch ($message['type']) {
                 case 'text':
                     $client->replyMessage(array(
