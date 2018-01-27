@@ -30,9 +30,9 @@ foreach ($client->parseEvents() as $event) {
                 foreach ($keywords as $keyword) {
                     if (mb_strpos($message['text'], $keyword) !== false) {
                         $candidate = array(
-                            'thumbnailImageUrl' => $item['gsx$photourl']['$t'],
-                            'title' => $item['gsx$title']['$t'],
-                            'text' => $item['gsx$title']['$t'],
+                            'thumbnailImageUrl' => $item['gsx$name']['$t'],
+                            'title' => $item['gsx$address']['$t'],
+                            'text' => $item['gsx$tel']['$t'],
                             'actions' => array(
                                 array(
                                     'type' => 'uri',
