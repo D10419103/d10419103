@@ -8,10 +8,8 @@
 
 require_once('./LINEBotTiny.php');
 
-// 重要資訊1
-$channelSecret = "f09490cd01d030f3bed923ab84c529cd";
-// 重要資訊2
-$channelAccessToken = "d94WAvqAJBWRXZ3pmnlejuQ7S/Glp8CDK0FHSSLEWlypMdpiPerBs23gk/xsbQjT31RHVd1iq4YVMqqLbYiRRA0AnDPQohV2zFBBwMBK5JchWjB47muK5uiHL2l/JvkepuraSTviQNaPxMjKM7z/jwdB04t89/1O/w1cDnyilFU=";
+$channelAccessToken = getenv('LINE_CHANNEL_ACCESSTOKEN');
+$channelSecret = getenv('LINE_CHANNEL_SECRET');
 // Google表單資料
 $googledataspi = "https://spreadsheets.google.com/feeds/list/2PACX-1vTwe_PXd61K4XdKxpPXvVRGbTsgA4Ka9IVZH0xLaSGX28hC4i6RmQ8UGdUfjZSHXU8ZLqctT8Ejjxit/od6/public/values?alt=json";
 
