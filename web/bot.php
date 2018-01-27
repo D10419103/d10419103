@@ -32,12 +32,12 @@ switch ($event['type']) {
         // 資料起始從feed.entry          
         foreach ($data['feed']['entry'] as $item) {
             // 將keywords欄位依,切成陣列
-            $keywords = explode(',', $item['gsx$keywords']['$t']);
+            $keywords = explode(',', $item['gsx$keyword']['$t']);
 
             // 以關鍵字比對文字內容，符合的話將店名/地址寫入
             foreach ($keywords as $keyword) {
                 if (mb_strpos($message['text'], $keyword) !== false) {                      
-                    $store_text = $item['gsx$storename']['$t']." 地址是:".$item['gsx$storeaddress']['$t'];                 
+                    $store_text = $item['gsx$name']['$t']." 地址是:".$item['gsx$address']['$t'];                 
               }
             }
         }       
