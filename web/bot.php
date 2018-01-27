@@ -32,7 +32,7 @@ switch ($event['type']) {
         // 資料起始從feed.entry          
         foreach ($data['feed']['entry'] as $item) {
             // 將keywords欄位依,切成陣列
-            $keywords = explode(',', $item['gsx$keyword']['$t']);
+            $keywords = explode(',', $item['gsx$keywords']['$t']);
 
             // 以關鍵字比對文字內容，符合的話將店名/地址寫入
             foreach ($keywords as $keyword) {
