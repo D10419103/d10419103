@@ -37,7 +37,7 @@ switch ($event['type']) {
             // 以關鍵字比對文字內容，符合的話將店名/地址寫入
             foreach ($keywords as $keyword) {
                 if (mb_strpos($message['text'], $keyword) !== false) {                      
-                    $store_text = $item['gsx$storename']['$t'] . " 地址是:" . $item['gsx$storeaddress']['$t'];                 
+                    $store_text = $item['gsx$store_name']['$t'] . " 地址是:" . $item['gsx$store_address']['$t'];                 
               }
             }
         } 
