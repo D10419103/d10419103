@@ -1,94 +1,76 @@
 <?php
 
-/**
- * Copyright 2016 LINE Corporation
- *
- * LINE Corporation licenses this file to you under the Apache License,
- * version 2.0 (the "License"); you may not use this file except in compliance
- * with the License. You may obtain a copy of the License at:
- *
- *   https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations
- * under the License.
- */
+/****************************************
+ * LINE 機器人範例
+ * 作者:林壽山
+ * 聯絡資訊: superlevin@gmail.com
+ ***************************************/
 
-require_once('line-bot-sdk-tiny/LINEBotTiny.php');
+require_once('./LINEBotTiny.php');
 
-$channelAccessToken = 'd94WAvqAJBWRXZ3pmnlejuQ7S/Glp8CDK0FHSSLEWlypMdpiPerBs23gk/xsbQjT31RHVd1iq4YVMqqLbYiRRA0AnDPQohV2zFBBwMBK5JchWjB47muK5uiHL2l/JvkepuraSTviQNaPxMjKM7z/jwdB04t89/1O/w1cDnyilFU=';
-$channelSecret = 'f09490cd01d030f3bed923ab84c529cd';
+// 重要資訊1
+$channelSecret = "688ec146c3313f33a13b092b09b54f9e";
+// 重要資訊2
+$channelAccessToken = "wHrkLZVJ6cdM8Z8Kl4HNLtZniDoHziZRzAt+omUamrIOqsGBZypLZWxHJnTOGInwyubB+FOE4UcP/NPr4mF9QId90wAdzisqnwnGYBCvS8tz+NhrfU7N8dqk/ZOkeqzjYqdczC/s4iX1OWP6gvyHAAdB04t89/1O/w1cDnyilFU=";
+// Google表單資料
+$googledataspi = "https://spreadsheets.google.com/feeds/list/1ggAB1JfVFne-E7VCWT3TG8KPFyEXxZHVjmei-F_bYv8/od6/public/values?alt=json";
 
+// 建立Client from LINEBotTiny
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
+
+// 取得事件(只接受文字訊息)
 foreach ($client->parseEvents() as $event) {
-    switch ($event['type']) {
-        case 'message':
-            $message = $event['message'];
+switch ($event['type']) {       
+    case 'message':
+        // 讀入訊息
+        $message = $event['message'];
 
-            $json = file_get_contents('https://spreadsheets.google.com/feeds/list/1e8ZjCPlB-hgy3b3boR4gMYifmfQibnCkTDBk_zu0K54/1/public/values?alt=json-in-script');
-            $data = json_decode($json, true);
-            $result = array();
+        // 將Google表單轉成JSON資料
+        $json = file_get_contents($googledataspi);
+        $data = json_decode($json, true);           
+        $store_text=''; 
+        // 資料起始從feed.entry          
+        foreach ($data['feed']['entry'] as $item) {
+            // 將keywords欄位依,切成陣列
+            $keywords = explode(',', $item['gsx$keywords']['$t']);
 
-            foreach ($data['feed']['entry'] as $item) {
-                $keywords = explode(',', $item['gsx$keywords']['$t']);
-
-                foreach ($keywords as $keyword) {
-                    if (mb_strpos($message['text'], $keyword) !== false) {
-                        $candidate = array(
-                            'thumbnailImageUrl' => $item['gsx$address']['$t'],
-                            'title' => $item['gsx$title']['$t'],
-                            'text' => $item['gsx$name']['$t'],
-                            'actions' => array(
-                                array(
-                                    'type' => 'message',
-                                    'label' => '查看詳情',
-                                    'text' => $item['gsxnamel']['$t'],
-                                    ),
-                                ),
-                            );
-                        array_push($result, $candidate);
-                    }
-                }
+            // 以關鍵字比對文字內容，符合的話將店名/地址寫入
+            foreach ($keywords as $keyword) {
+                if (mb_strpos($message['text'], $keyword) !== false) {                      
+                    $store_text = $item['gsx$name']['$t']." 地址是:".$item['gsx$address']['$t'];                 
+              }
             }
+        }       
 
-            switch ($message['type']) {
-                case 'text':
-                    $client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => array(
-                            array(
-                                'type' => 'text',
-                                'text' => $message['text'].'讓我想想喔…',
-                            ),
-                            array(
-                                'type' => 'template',
-                                'altText' => '為您推薦下列美食：',
-                                'template' => array(
-                                    'type' => 'carousel',
-                                    'columns' => $result,
-                                ),
-                            ),
-                            array(
-                                'type' => 'text',
-                                'text' => '這些都超好吃，真心不騙！',
-                            ),
-                            array(
-                                'type' => 'sticker',
-                                'packageId' => '1',
-                                'stickerId' => '2',
-                            ),
+
+
+        switch ($message['type']) {
+            case 'text':
+                // 回覆訊息
+                // 第一段 你要想找_(原字串)_ 讓我想想喔…
+                // 第二段 介紹你_______不錯喔
+                $client->replyMessage(array(
+                    'replyToken' => $event['replyToken'],
+                    'messages' => array(
+                        array(
+                            'type' => 'text',
+                            'text' => '你想要找'.$message['text'].' 讓我想想喔…',
                         ),
-                    ));
-                    break;
-                default:
-                    error_log("Unsupporeted message type: " . $message['type']);
-                    break;
-            }
-            break;
-        default:
-            error_log("Unsupporeted event type: " . $event['type']);
-            break;
-    }
+                        array(
+                            'type' => 'text',
+                            'text' => '介紹你 '.$store_text.' 不錯喔',
+                        )
+
+                    ),
+                ));               
+                break;
+            default:
+                error_log("Unsupporeted message type: " . $message['type']);
+                break;
+        }
+        break;
+    default:
+        error_log("Unsupporeted event type: " . $event['type']);
+        break;
+}
 };
