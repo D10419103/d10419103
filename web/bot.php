@@ -9,8 +9,9 @@
 require_once('./LINEBotTiny.php');
 
 // 重要資訊1
-$channelAccessToken = getenv('LINE_CHANNEL_ACCESSTOKEN');
-$channelSecret = getenv('LINE_CHANNEL_SECRET');
+$channelSecret = "f09490cd01d030f3bed923ab84c529cd";
+// 重要資訊2
+$channelAccessToken = "d94WAvqAJBWRXZ3pmnlejuQ7S/Glp8CDK0FHSSLEWlypMdpiPerBs23gk/xsbQjT31RHVd1iq4YVMqqLbYiRRA0AnDPQohV2zFBBwMBK5JchWjB47muK5uiHL2l/JvkepuraSTviQNaPxMjKM7z/jwdB04t89/1O/w1cDnyilFU=";
 // Google表單資料
 $googledataspi = "https://spreadsheets.google.com/feeds/list/1e8ZjCPlB-hgy3b3boR4gMYifmfQibnCkTDBk_zu0K54/1/public/values?alt=json-in-script";
 
@@ -36,7 +37,7 @@ switch ($event['type']) {
             // 以關鍵字比對文字內容，符合的話將店名/地址寫入
             foreach ($keywords as $keyword) {
                 if (mb_strpos($message['text'], $keyword) !== false) {                      
-                    $store_text = $item['gsx$name']['$t'];                 
+                    $store_text = $item['gsx$name']['$t']." 地址是:".$item['gsx$address']['$t'];                 
               }
             }
         }       
@@ -57,7 +58,7 @@ switch ($event['type']) {
                         ),
                         array(
                             'type' => 'text',
-                            'text' => '介紹你 '. $store_text .' 不錯喔',
+                            'text' => '介紹你 '.$store_text.' 不錯喔',
                         )
 
                     ),
