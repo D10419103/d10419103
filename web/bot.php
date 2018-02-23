@@ -9,11 +9,11 @@
 require_once('./LINEBotTiny.php');
 
 // 重要資訊1
-$channelSecret = "688ec146c3313f33a13b092b09b54f9e";
+$channelSecret = "f09490cd01d030f3bed923ab84c529cd";
 // 重要資訊2
-$channelAccessToken = "wHrkLZVJ6cdM8Z8Kl4HNLtZniDoHziZRzAt+omUamrIOqsGBZypLZWxHJnTOGInwyubB+FOE4UcP/NPr4mF9QId90wAdzisqnwnGYBCvS8tz+NhrfU7N8dqk/ZOkeqzjYqdczC/s4iX1OWP6gvyHAAdB04t89/1O/w1cDnyilFU=";
+$channelAccessToken = "d94WAvqAJBWRXZ3pmnlejuQ7S/Glp8CDK0FHSSLEWlypMdpiPerBs23gk/xsbQjT31RHVd1iq4YVMqqLbYiRRA0AnDPQohV2zFBBwMBK5JchWjB47muK5uiHL2l/JvkepuraSTviQNaPxMjKM7z/jwdB04t89/1O/w1cDnyilFU=";
 // Google表單資料
-$googledataspi = "https://spreadsheets.google.com/feeds/list/1ggAB1JfVFne-E7VCWT3TG8KPFyEXxZHVjmei-F_bYv8/od6/public/values?alt=json";
+$googledataspi = "https://spreadsheets.google.com/feeds/list/1e8ZjCPlB-hgy3b3boR4gMYifmfQibnCkTDBk_zu0K54/1/public/values?alt=json-in-script";
 
 // 建立Client from LINEBotTiny
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
