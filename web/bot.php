@@ -1,26 +1,33 @@
 <?php
 
-/****************************************
- * LINE 機器人範例
- * 作者:林壽山
- * 聯絡資訊: superlevin@gmail.com
- ***************************************/
+/**
+ * Copyright 2016 LINE Corporation
+ *
+ * LINE Corporation licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
 
 require_once('./LINEBotTiny.php');
 
-// 重要資訊1
-$channelSecret = "f09490cd01d030f3bed923ab84c529cd";
-// 重要資訊2
-$channelAccessToken = "d94WAvqAJBWRXZ3pmnlejuQ7S/Glp8CDK0FHSSLEWlypMdpiPerBs23gk/xsbQjT31RHVd1iq4YVMqqLbYiRRA0AnDPQohV2zFBBwMBK5JchWjB47muK5uiHL2l/JvkepuraSTviQNaPxMjKM7z/jwdB04t89/1O/w1cDnyilFU=";
-// Google表單資料
+
+
+$channelAccessToken = getenv('LINE_CHANNEL_ACCESSTOKEN');
+$channelSecret = getenv('LINE_CHANNEL_SECRET');
 $googledataspi = "https://spreadsheets.google.com/feeds/list/1e8ZjCPlB-hgy3b3boR4gMYifmfQibnCkTDBk_zu0K54/1/public/values?alt=json-in-script";
 
-// 建立Client from LINEBotTiny
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 
-// 取得事件(只接受文字訊息)
 foreach ($client->parseEvents() as $event) {
-switch ($event['type']) {       
+    switch ($event['type']) {      
     case 'message':
         // 讀入訊息
         $message = $event['message'];
