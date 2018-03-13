@@ -14,7 +14,7 @@ use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\GuzzleHTTPClient;
 use LINE\LINEBot\Message\MultipleMessages;
 use LINE\LINEBot\Message\RichMessage\Markup;
-require "vendor/autoload.php";
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once "vendor/joshcam/mysqli-database-class/MysqliDb.php";
 $setting = require('config.php');
 $db = new MysqliDb(Array(
