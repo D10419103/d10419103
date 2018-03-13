@@ -1,4 +1,12 @@
 <?php
+require_once('./LINEBotTiny.php');
+
+
+$channelAccessToken = getenv('LINE_CHANNEL_ACCESSTOKEN');
+$channelSecret = getenv('LINE_CHANNEL_SECRET');
+
+$client = new LINEBotTiny($channelAccessToken, $channelSecret);
+
 //DEBUG
 file_put_contents("debug.txt", file_get_contents("php://input"),FILE_APPEND);
 $receive = json_decode(file_get_contents("php://input"));
